@@ -266,11 +266,15 @@ class Tree {
   }
 
   rebalance() {
-    // to-do...
-  }
+    if (this.isBalanced()) {
+      console.log("The tree is already balanced");
+      return;
+    }
 
-  _rebalance() {
-    if (this.isBalanced === true) return;
+    let newValues = [];
+    this.inOrder((node) => newValues.push(node.data));
+
+    this.root = this.buildTree(newValues);
   }
 }
 
@@ -315,3 +319,11 @@ const nodeToCheck = tree.find(1);
 
 console.log(`Find node's height given node: ${tree.height(nodeToCheck)}`);
 console.log(`Find node's depth given node: ${tree.depth(nodeToCheck)}`);
+
+tree.insert(200);
+tree.insert(201);
+
+prettyPrint(tree.root);
+tree.rebalance();
+prettyPrint(tree.root);
+tree.rebalance();
